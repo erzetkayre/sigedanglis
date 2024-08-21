@@ -43,4 +43,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function device() {
+        return $this->hasOne('App\Models\Devices');
+    }
 }
