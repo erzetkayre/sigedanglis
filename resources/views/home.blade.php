@@ -291,7 +291,7 @@
 {{-- Copyright --}}
 <section class="py-5" id="footer">
     <div class="mt-auto w-full max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
-        <p class="text-center"> © Copyright 2024 - Gerobak Dagang Listrik Teknik Elektro Universitas Sebelas Maret</p>
+        <p class="text-center text-sm"> © Copyright 2024 - Gerobak Dagang Listrik Teknik Elektro Universitas Sebelas Maret</p>
     </div>
 </section>
 

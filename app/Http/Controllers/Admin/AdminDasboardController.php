@@ -12,6 +12,6 @@ class AdminDasboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('layouts.sidebar');
+        return view('pages.admin.dashboard');
     }
 }

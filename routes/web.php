@@ -21,6 +21,10 @@ Route::middleware('auth')->group(function () {
     // Route untuk Owner
     Route::name('owner.')->middleware('role:owner')->group(function() {
         Route::get('/owner/dashboard', Owner\OwnerDashboardController::class)->name('dashboard');
+        Route::get('owner/monitoring-pv', [Owner\MonitoringController::class, 'monitoringpv'])->name('pv');
+        Route::get('owner/monitoring-gerobak', [Owner\MonitoringController::class, 'monitoringcart'])->name('cart');
+        Route::resource('owner/users', Owner\UserManagementController::class);
+        Route::resource('owner/report', Owner\ReportController::class);
     });
 
     // Route untuk Seller
