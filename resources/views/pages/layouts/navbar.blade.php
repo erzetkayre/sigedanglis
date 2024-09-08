@@ -6,6 +6,8 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         @vite(['resources/js/app.js','resources/css/app.css'])
         <title>@yield('title','Gedanglis')</title>
+        {{-- Scroll Reveal --}}
+        <script src="https://unpkg.com/scrollreveal"></script>
         {{-- Jquery --}}
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         {{-- Font Awesome --}}

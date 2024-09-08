@@ -300,6 +300,17 @@
 
     ScrollReveal().reveal('.judul',{origin:'left'});
 </script>
+<script>
+    // Initialize ScrollReveal
+    ScrollReveal().reveal('.judul', { origin: 'left', distance: '50px', duration: 1000 });
+    ScrollReveal().reveal('#beranda', { origin: 'bottom', distance: '50px', duration: 1000 });
+    ScrollReveal().reveal('#about', { origin: 'bottom', distance: '50px', duration: 1000 });
+    ScrollReveal().reveal('#features', { origin: 'bottom', distance: '50px', duration: 1000 });
+    ScrollReveal().reveal('#location', { origin: 'bottom', distance: '50px', duration: 1000 });
+    ScrollReveal().reveal('#contact', { origin: 'bottom', distance: '50px', duration: 1000 });
+    ScrollReveal().reveal('#footer', { origin: 'bottom', distance: '50px', duration: 1000 });
+</script>
+
 
 @endsection
 
