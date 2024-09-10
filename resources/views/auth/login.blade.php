@@ -5,7 +5,7 @@
         <img class="w-36 h-auto" src="assets/images/logo.png" alt="Logo">
     </div>
     <div class="text-center pb-6">
-        <h1 class="text-lg">Login Admin Gedanglis</h1>
+        <h1 class="text-lg font-bold">Login Admin Gedanglis</h1>
     </div>
 
     <form method="POST" action="{{ route('login') }}">

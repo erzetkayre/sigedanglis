@@ -7,6 +7,7 @@
         @vite(['resources/js/app.js','resources/css/app.css'])
         <link rel="canonical" href="https://preline.co/">
         <title>@yield('title','Gedanglis')</title>
+        <link rel="icon" href="../assets/images/icon.png">
         {{-- Scroll Reveal --}}
         <script src="https://unpkg.com/scrollreveal"></script>
         {{-- Jquery --}}
@@ -17,8 +18,6 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24..48,100..700,0..1,-50..200" />
         {{-- Scroll Reveal  --}}
         <script src="https://unpkg.com/scrollreveal"></script>
-        <!-- Favicon -->
-        <link rel="shortcut icon" href="../../favicon.ico">
         <!-- Font -->
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
         <!-- Theme Check and Update -->
@@ -148,8 +147,6 @@
                 </x-slot>
             </x-dropdown>
         </div>
-
-
     </div>
 
   <!-- Sidebar -->

@@ -303,7 +303,7 @@
 <script>
     // Initialize ScrollReveal
     ScrollReveal().reveal('.judul', { origin: 'left', distance: '50px', duration: 1000 });
-    ScrollReveal().reveal('#beranda', { origin: 'bottom', distance: '50px', duration: 1000 });
+    ScrollReveal().reveal('#beranda', { origin: 'bottom', distance: '15px', duration: 750 });
     ScrollReveal().reveal('#about', { origin: 'bottom', distance: '50px', duration: 1000 });
     ScrollReveal().reveal('#features', { origin: 'bottom', distance: '50px', duration: 1000 });
     ScrollReveal().reveal('#location', { origin: 'bottom', distance: '50px', duration: 1000 });

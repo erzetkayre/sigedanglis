@@ -16,6 +16,8 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24..48,100..700,0..1,-50..200" />
         {{-- Scroll Reveal  --}}
         <script src="https://unpkg.com/scrollreveal"></script>
+        <link rel="icon" href="assets/images/icon.png">
+
     </head>
     <body>
         {{-- Navigation Bar --}}
