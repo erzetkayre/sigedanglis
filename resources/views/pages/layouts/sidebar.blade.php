@@ -51,7 +51,7 @@
     <div class="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 lg:px-8 lg:hidden">
         <div class="flex items-center py-2">
         <!-- Navigation Toggle -->
-        <button type="button" class="size-8 flex justify-center items-center gap-x-2 border border-gray-200 text-gray-800 hover:text-gray-500 rounded-lg focus:outline-none focus:text-gray-500 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-500 dark:focus:text-neutral-500" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-application-sidebar" aria-label="Toggle navigation" data-hs-overlay="#hs-application-sidebar">
+        <button type="button" class="size-8 flex justify-center items-center gap-x-2 border border-sky-100 text-gray-800 hover:text-gray-500 rounded-lg focus:outline-none focus:text-gray-500 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-500 dark:focus:text-neutral-500" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-application-sidebar" aria-label="Toggle navigation" data-hs-overlay="#hs-application-sidebar">
             <span class="sr-only">Toggle Navigation</span>
             <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect width="18" height="18" x="3" y="3" rx="2" />
@@ -79,93 +79,25 @@
     <!-- End Breadcrumb -->
 
 
-    <div class="flex justify-between h-16">
-        <div class="flex">
-            <!-- Logo -->
-
-
-            <!-- Navigation Links -->
-            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                @if (auth()->check())
-                    @php
-                        $role = auth()->user()->role_id;
-                    @endphp
-
-                    {{-- Role Owner --}}
-                    @if ($role == 1)
-                    <x-nav-link :href="route('owner.dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-
-                    {{-- Role Admin --}}
-                    @elseif ($role == 2)
-                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-
-                    {{-- Role Seller --}}
-                    @else ($role == 2)
-                    <x-nav-link :href="route('seller.dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    @endif
-                @endif
-
-            </div>
-        </div>
-
-        <!-- Settings Dropdown -->
-        <div class="hidden sm:flex sm:items-center sm:ms-6">
-            <x-dropdown align="right" width="48">
-                <x-slot name="trigger">
-                    <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                        <div>{{ Auth::user()->name }}</div>
-
-                        <div class="ms-1">
-                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
-                        </div>
-                    </button>
-                </x-slot>
-
-                <x-slot name="content">
-                    <x-dropdown-link :href="route('profile.edit')">
-                        {{ __('Profile') }}
-                    </x-dropdown-link>
-
-                    <!-- Authentication -->
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-
-                        <x-dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault();
-                                            this.closest('form').submit();">
-                            {{ __('Log Out') }}
-                        </x-dropdown-link>
-                    </form>
-                </x-slot>
-            </x-dropdown>
-        </div>
-    </div>
-
   <!-- Sidebar -->
-  <div id="hs-application-sidebar" class="hs-overlay  [--auto-close:lg]
+<div id="hs-application-sidebar" class="hs-overlay  [--auto-close:lg]
     hs-overlay-open:translate-x-0
     -translate-x-full transition-all duration-300 transform
     w-[260px] h-full
     hidden
     fixed inset-y-0 start-0 z-[60]
-    bg-white border-e border-gray-200
-    lg:block lg:translate-x-0 lg:end-auto lg:bottom-0
-   " role="dialog" tabindex="-1" aria-label="Sidebar">
+    bg-white border-e border-sky-100
+    lg:block lg:translate-x-0 lg:end-auto lg:bottom-0" role="dialog" tabindex="-1" aria-label="Sidebar">
     <div class="relative flex flex-col h-full max-h-full">
-        <div class="px-6 pt-4">
+        {{-- Title --}}
+        <div class="px-6 pt-5 pb-3">
             <a class="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80" href="#" aria-label="Preline">
             Gedanglis.
             </a>
         </div>
-        <div class="h-full overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
+
+        {{-- Main Menu --}}
+        <div class="h-full flex-grow overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
             <nav class="hs-accordion-group p-3 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
                 <ul class="flex flex-col space-y-1">
                         @if (auth()->check())
@@ -176,11 +108,11 @@
                             {{-- Role Owner --}}
                             @if ($role == 1)
                             <li class="text-md font-semibold text-sky-500 py-3 ps-3">
-                                Owner Menus
+                                Menu Owner
                             </li>
                             <li>
-                                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-700 dark:text-white
-                                    {{ Route::is('owner.dashboard') ? 'bg-gray-200 dark:bg-neutral-800' : '' }}"
+                                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100
+                                    {{ Route::is('owner.dashboard') ? 'bg-sky-100 dark:bg-neutral-800' : '' }}"
                                     href="{{ route('owner.dashboard') }}">
                                     <span class="material-symbols-rounded">home</span>
                                     Dashboard
@@ -188,17 +120,8 @@
                             </li>
 
                             <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300
-                                    {{ Route::is('owner.users.index') ? 'bg-gray-200 dark:bg-neutral-800' : '' }}"
-                                    href="{{ route('owner.users.index') }}">
-                                    <span class="material-symbols-rounded">groups</span>
-                                    User Management
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300
-                                    {{ Route::is('owner.pv') ? 'bg-gray-200 dark:bg-neutral-800' : '' }}"
+                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100
+                                    {{ Route::is('owner.pv') ? 'bg-sky-100 dark:bg-neutral-800' : '' }}"
                                     href="{{ route('owner.pv') }}">
                                     <span class="material-symbols-rounded">solar_power</span>
                                     Monitoring PV
@@ -206,8 +129,8 @@
                             </li>
 
                             <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300
-                                    {{ Route::is('owner.cart') ? 'bg-gray-200 dark:bg-neutral-800' : '' }}"
+                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100
+                                    {{ Route::is('owner.cart') ? 'bg-sky-100 dark:bg-neutral-800' : '' }}"
                                     href="{{ route('owner.cart') }}">
                                     <span class="material-symbols-rounded">agriculture</span>
                                     Monitoring Gerobak
@@ -215,22 +138,31 @@
                             </li>
 
                             <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300
-                                    {{ Route::is('owner.report.index') ? 'bg-gray-200 dark:bg-neutral-800' : '' }}"
+                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100
+                                    {{ Route::is('owner.report.index') ? 'bg-sky-100 dark:bg-neutral-800' : '' }}"
                                     href="{{ route('owner.report.index') }}">
                                     <span class="material-symbols-rounded">summarize</span>
                                     Report and Summary
                                 </a>
                             </li>
 
+                            <li>
+                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100
+                                    {{ Route::is('owner.users.index') ? 'bg-sky-100 dark:bg-neutral-800' : '' }}"
+                                    href="{{ route('owner.users.index') }}">
+                                    <span class="material-symbols-rounded">groups</span>
+                                    User Management
+                                </a>
+                            </li>
+
                             {{-- Role Admin --}}
                             @elseif ($role == 2)
                             <li class="text-md font-semibold text-sky-500 py-3 ps-3">
-                                Admin Menus
+                                Menu Admin
                             </li>
                             <li>
-                                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-700 dark:text-white
-                                    {{ Route::is('owner.dashboard') ? 'bg-gray-200 dark:bg-neutral-800' : '' }}"
+                                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100 focus:outline-none focus:bg-gray-100
+                                    {{ Route::is('owner.dashboard') ? 'bg-sky-100 dark:bg-neutral-800' : '' }}"
                                     href="{{ route('owner.dashboard') }}">
                                     <span class="material-symbols-rounded">home</span>
                                     Dashboard
@@ -238,8 +170,8 @@
                             </li>
 
                             <li>
-                                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-700 dark:text-white
-                                    {{ Route::is('owner.users.index') ? 'bg-gray-200 dark:bg-neutral-800' : '' }}"
+                                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100 focus:outline-none focus:bg-gray-100
+                                    {{ Route::is('owner.users.index') ? 'bg-sky-100 dark:bg-neutral-800' : '' }}"
                                     href="{{ route('owner.users.index') }}">
                                     <span class="material-symbols-rounded">groups</span>
                                     User Management
@@ -247,8 +179,8 @@
                             </li>
 
                             <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300
-                                    {{ Route::is('owner.pv') ? 'bg-gray-200 dark:bg-neutral-800' : '' }}"
+                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100
+                                    {{ Route::is('owner.pv') ? 'bg-sky-100 dark:bg-neutral-800' : '' }}"
                                     href="{{ route('owner.pv') }}">
                                     <span class="material-symbols-rounded">solar_power</span>
                                     Monitoring PV
@@ -256,8 +188,8 @@
                             </li>
 
                             <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300
-                                    {{ Route::is('owner.cart') ? 'bg-gray-200 dark:bg-neutral-800' : '' }}"
+                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100
+                                    {{ Route::is('owner.cart') ? 'bg-sky-100 dark:bg-neutral-800' : '' }}"
                                     href="{{ route('owner.cart') }}">
                                     <span class="material-symbols-rounded">agriculture</span>
                                     Monitoring Gerobak
@@ -265,8 +197,8 @@
                             </li>
 
                             <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300
-                                    {{ Route::is('owner.report.index') ? 'bg-gray-200 dark:bg-neutral-800' : '' }}"
+                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100
+                                    {{ Route::is('owner.report.index') ? 'bg-sky-100 dark:bg-neutral-800' : '' }}"
                                     href="{{ route('owner.report.index') }}">
                                     <span class="material-symbols-rounded">summarize</span>
                                     Report and Summary
@@ -287,7 +219,7 @@
 
 
                         {{-- <li class="hs-accordion" id="users-accordion">
-                            <button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-200" aria-expanded="true" aria-controls="users-accordion-child">
+                            <button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200" aria-expanded="true" aria-controls="users-accordion-child">
                                 <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
                                 <circle cx="9" cy="7" r="4" />
@@ -307,7 +239,7 @@
                             <div id="users-accordion-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" role="region" aria-labelledby="users-accordion">
                                 <ul class="hs-accordion-group ps-8 pt-1 space-y-1" data-hs-accordion-always-open>
                                 <li class="hs-accordion" id="users-accordion-sub-1">
-                                    <button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-200" aria-expanded="true" aria-controls="users-accordion-sub-1-child">
+                                    <button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200" aria-expanded="true" aria-controls="users-accordion-sub-1-child">
                                     Sub Menu 1
 
                                     <svg class="hs-accordion-active:block ms-auto hidden size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -322,17 +254,17 @@
                                     <div id="users-accordion-sub-1-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" role="region" aria-labelledby="users-accordion-sub-1">
                                     <ul class="pt-1 space-y-1">
                                         <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200" href="#">
+                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200" href="#">
                                             Link 1
                                         </a>
                                         </li>
                                         <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200" href="#">
+                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200" href="#">
                                             Link 2
                                         </a>
                                         </li>
                                         <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200" href="#">
+                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200" href="#">
                                             Link 3
                                         </a>
                                         </li>
@@ -340,7 +272,7 @@
                                     </div>
                                 </li>
                                 <li class="hs-accordion" id="users-accordion-sub-2">
-                                    <button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-200" aria-expanded="true" aria-controls="users-accordion-sub-2-child">
+                                    <button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200" aria-expanded="true" aria-controls="users-accordion-sub-2-child">
                                     Sub Menu 2
 
                                     <svg class="hs-accordion-active:block ms-auto hidden size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -355,17 +287,17 @@
                                     <div id="users-accordion-sub-2-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" role="region" aria-labelledby="users-accordion-sub-2">
                                     <ul class="pt-1 space-y-1">
                                         <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200" href="#">
+                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200" href="#">
                                             Link 1
                                         </a>
                                         </li>
                                         <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200" href="#">
+                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200" href="#">
                                             Link 2
                                         </a>
                                         </li>
                                         <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200" href="#">
+                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200" href="#">
                                             Link 3
                                         </a>
                                         </li>
@@ -377,6 +309,27 @@
                         </li> --}}
                 </ul>
             </nav>
+        </div>
+
+        {{-- Footer Menu --}}
+        <div class="border-t border-sky-100 p-3">
+            <ul class="flex flex-col space-y-1">
+                <li>
+                    <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100" href="{{ route('profile.edit') }}">
+                        <span class="material-symbols-rounded">settings</span>
+                        Profile Settings
+                    </a>
+                </li>
+                <li>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
+                            <span class="material-symbols-rounded">logout</span>
+                            {{ __('Log Out') }}
+                        </a>
+                    </form>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

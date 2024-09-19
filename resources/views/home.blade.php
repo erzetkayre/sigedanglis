@@ -2,8 +2,11 @@
 
 @section('title','Home - Gedanglis')
 @section('content')
+<script>
+    AOS.init();
+</script>
 {{-- Section Welcome --}}
-<section class="py-10" id="beranda">
+<section class="pt-10" id="beranda" data-aos="fade-up">
     <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
             <div>
@@ -24,8 +27,8 @@
 </section>
 
 {{-- Section About --}}
-<section class="judul pt-5 text-center page-section " id="about">
-    <div class="max-w-[85rem] px-4 py-3 sm:px-6 lg:px-8 lg:py-7 mx-auto">
+<section class="judul pt-5" id="about" data-aos="fade-up">
+    <div class="text-center max-w-[85rem] px-4 py-3 sm:px-6 lg:px-8 lg:py-7 mx-auto">
         <h1 class=" text-5xl text-gray-800 font-bold lg:text-4xl align-middle">
             About Us
         </h1>
@@ -81,8 +84,8 @@
                     <span class="hs-carousel-active:bg-sky-500 hs-carousel-active:border-sky-500 size-3 border border-gray-400 rounded-full cursor-pointer"></span>
                 </div>
             </div> --}}
-            <div class="flex justify-center h-4/6">
-                <img src="assets/images/real.svg" alt="">
+            <div class="flex justify-center w-4/6">
+                <img class="object-center" src="assets/images/real.svg" alt="search">
             </div>
             <div>
                 <h1 class=" text-5xl md:text-2xl sm:text-xl text-gray-800 font-bold lg:text-4xl text-start">
@@ -100,7 +103,7 @@
 </section>
 
 {{-- Section Features --}}
-<section class="pt-5 pb-10" id="features">
+<section class="pt-5 pb-10" id="features" data-aos="fade-up">
     <div class="text-center max-w-[85rem] px-4 py-3 sm:px-6 lg:px-8 lg:pt-7 mx-auto">
         <h1 class=" text-5xl text-gray-800 font-bold lg:text-4xl align-middle">
             Our Features
@@ -210,7 +213,7 @@
 </section>
 
 {{-- Section Location --}}
-<section class="pt-10 pb-10" id="location">
+<section class="pt-10 pb-10" id="location" data-aos="fade-up">
     <div class="text-center">
         <div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 lg:py-3 mx-auto">
             <h1 class=" text-5xl text-gray-800 font-bold lg:text-4xl align-middle">
@@ -227,7 +230,7 @@
 </section class="pt-10 pb-10" id="team">
 
 {{-- Footer --}}
-<section class="pt-5" id="contact">
+<section class="pt-5" id="contact" data-aos="fade-up">
  <!-- ========== FOOTER ========== -->
     <footer class="mt-auto bg-sky-900 w-full">
         <div class="mt-auto w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 lg:pt-20 mx-auto">
@@ -257,7 +260,12 @@
 
             <div class="mt-3 grid space-y-3">
                 <Address class="inline-flex gap-x-2 text-gray-400">Jl. Ir. Sutami No.36 A, Jebres, Kec. Jebres, Kota Surakarta, Jawa Tengah 57126</Address>
-                <Address class="inline-flex gap-x-2 text-gray-400">support.gedanglis@gmail.com</Address>
+                <a href="" class="inline-flex gap-x-2 text-gray-400">support.gedanglis@gmail.com</a>
+                <a href="https://wa.me/+6282295313834" target="_blank">
+                    <button type="button" class="flex shrink-0 justify-center items-center gap-2 size-[38px] text-sm font-medium rounded-lg border border-transparent bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:bg-green-600 disabled:opacity-50 disabled:pointer-events-none">
+                        <i class="fa-brands fa-whatsapp fa-xl"></i>
+                    </button>
+                </a>
 
             </div>
             </div>
@@ -285,31 +293,17 @@
         <!-- End Grid -->
     </footer>
     <!-- ========== END FOOTER ========== -->
-</section>
-<hr class="border-sky-400">
+</section data-aos="fade-up">
+<hr class="border-sky-800">
 
 {{-- Copyright --}}
-<section class="py-5" id="footer">
+<section class="py-5 bg-sky-900" id="footer">
     <div class="mt-auto w-full max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
-        <p class="text-center text-sm"> © Copyright 2024 - Gerobak Dagang Listrik Teknik Elektro Universitas Sebelas Maret</p>
+        <p class="text-center text-sm text-white"> © Copyright 2024 - Gerobak Dagang Listrik Teknik Elektro Universitas Sebelas Maret</p>
     </div>
 </section>
 
-<script>
-    ScrollReveal({ reset: true });
 
-    ScrollReveal().reveal('.judul',{origin:'left'});
-</script>
-<script>
-    // Initialize ScrollReveal
-    ScrollReveal().reveal('.judul', { origin: 'left', distance: '50px', duration: 1000 });
-    ScrollReveal().reveal('#beranda', { origin: 'bottom', distance: '15px', duration: 750 });
-    ScrollReveal().reveal('#about', { origin: 'bottom', distance: '50px', duration: 1000 });
-    ScrollReveal().reveal('#features', { origin: 'bottom', distance: '50px', duration: 1000 });
-    ScrollReveal().reveal('#location', { origin: 'bottom', distance: '50px', duration: 1000 });
-    ScrollReveal().reveal('#contact', { origin: 'bottom', distance: '50px', duration: 1000 });
-    ScrollReveal().reveal('#footer', { origin: 'bottom', distance: '50px', duration: 1000 });
-</script>
 
 
 @endsection
