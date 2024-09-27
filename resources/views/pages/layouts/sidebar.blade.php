@@ -7,6 +7,10 @@
         @vite(['resources/js/app.js','resources/css/app.css'])
         <link rel="canonical" href="https://preline.co/">
         <title>@yield('title','Gedanglis')</title>
+        {{-- Leaflet Map --}}
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"/>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+        {{-- Icon --}}
         <link rel="icon" href="../assets/images/icon.png">
         {{-- Scroll Reveal --}}
         <script src="https://unpkg.com/scrollreveal"></script>
@@ -92,7 +96,7 @@
         {{-- Title --}}
         <div class="px-6 pt-5 pb-3">
             <a class="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80" href="#" aria-label="Preline">
-            Gedanglis.
+            Gedanglis V1.0
             </a>
         </div>
 
@@ -104,11 +108,10 @@
                             @php
                                 $role = auth()->user()->role_id;
                             @endphp
-
                             {{-- Role Owner --}}
                             @if ($role == 1)
-                            <li class="text-md font-semibold text-sky-500 py-3 ps-3">
-                                Menu Owner
+                            <li class="text-xs font-semibold text-sky-400 py-1 ps-3">
+                                UTAMA
                             </li>
                             <li>
                                 <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100
@@ -118,13 +121,15 @@
                                     Dashboard
                                 </a>
                             </li>
-
+                            <li class="text-xs font-semibold text-sky-400 py-1 pt-4 ps-3">
+                                MONITORING
+                            </li>
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100
                                     {{ Route::is('owner.pv') ? 'bg-sky-100 dark:bg-neutral-800' : '' }}"
                                     href="{{ route('owner.pv') }}">
                                     <span class="material-symbols-rounded">solar_power</span>
-                                    Monitoring PV
+                                    Solar Panel
                                 </a>
                             </li>
 
@@ -133,10 +138,12 @@
                                     {{ Route::is('owner.cart') ? 'bg-sky-100 dark:bg-neutral-800' : '' }}"
                                     href="{{ route('owner.cart') }}">
                                     <span class="material-symbols-rounded">agriculture</span>
-                                    Monitoring Gerobak
+                                    Gerobak Dagang
                                 </a>
                             </li>
-
+                            {{-- <li class="text-sm font-semibold text-sky-400 py-2 ps-3">
+                                USER
+                            </li>
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-sky-100
                                     {{ Route::is('owner.report.index') ? 'bg-sky-100 dark:bg-neutral-800' : '' }}"
@@ -153,7 +160,7 @@
                                     <span class="material-symbols-rounded">groups</span>
                                     User Management
                                 </a>
-                            </li>
+                            </li> --}}
 
                             {{-- Role Admin --}}
                             @elseif ($role == 2)

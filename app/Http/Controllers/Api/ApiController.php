@@ -8,6 +8,7 @@ use App\Models\Devices;
 use App\Models\Tracking;
 use App\Models\MonitoringPV;
 use App\Models\MonitoringCart;
+use Carbon\Carbon;
 
 class ApiController extends Controller
 {
@@ -126,5 +127,72 @@ class ApiController extends Controller
                 ]);
             }
         }
+    }
+    public function tracking_history($deviceId)
+    {
+        $locationHistory = Tracking::where('device_id', $deviceId)
+                                ->orderBy('created_at', 'asc')
+                                ->get(['latitude', 'longitude', 'created_at']);
+
+        return response()->json($locationHistory);
+    }
+
+    public function get_monitoring_pv($deviceId)
+    {
+    //     // Pengecekan Device Terdaftar
+    //     $device = Devices::find($deviceId);
+    //     if (!$device) {
+    //         return response()->json([
+    //             "message" => 'Device not found',
+    //             "status" => 404,
+    //         ]);
+    //     }
+
+    //     // Get the current date and the previous 24 hours of data
+    //     $now = Carbon::now();
+    //     $data = MonitoringPV::where('device_id', $device->id)
+    //         ->whereBetween('created_at', [$now->subHours(24), $now])
+    //         ->get();
+
+    //     if ($data->isEmpty()) {
+    //         return response()->json([
+    //             "message" => 'No data available',
+    //             "status" => 404,
+    //         ]);
+    //     }
+
+    //     // Calculate averages per hour
+    //     $averages = [];
+    //     for ($i = 0; $i < 24; $i++) {
+    //         $hourData = $data->filter(function ($item) use ($i) {
+    //             return $item->created_at->hour == ($i);
+    //         });
+
+    //         if ($hourData->isNotEmpty()) {
+    //             $averages[] = [
+    //                 'hour' => $i,
+    //                 'volt' => $hourData->avg('volt'),
+    //                 'current' => $hourData->avg('current'),
+    //                 'power' => $hourData->avg('power'),
+    //             ];
+    //         } else {
+    //             $averages[] = [
+    //                 'hour' => $i,
+    //                 'volt' => 0,
+    //                 'current' => 0,
+    //                 'power' => 0,
+    //             ];
+    //         }
+    //     }
+
+    //     return response()->json([
+    //         'message' => 'Average data retrieved successfully',
+    //         'data' => $averages,
+    //     ]);
+    // }
+
+    $data = MonitoringPV::where('device_id', $deviceId)->get();
+
+    return response()->json($data);
     }
 }

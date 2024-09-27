@@ -3,6 +3,14 @@
 @section('title','Monitoring PV - Gedanglis')
 @section('content')
 
+<style>
+    #map{
+        width: 100%;
+        height: 100%;
+        border-radius: 0.5rem;
+        overflow: hidden;
+    }
+</style>
 <!-- Content -->
 <div class="min-h-screen w-full lg:ps-64 bg-zinc-50">
     <!-- Content -->
@@ -29,18 +37,17 @@
             <!-- Card for Location (Full Width) -->
             <div class="col-span-2 flex flex-col bg-white border shadow-sm rounded-xl p-4 md:p-5">
                 <h2 class="text-lg font-semibold text-gray-800 mb-4">Lokasi Terkini Gerobak</h2>
-                <div class="bg-gray-200 rounded-lg h-64 flex items-center justify-center">
+                <div class="bg-gray-200 rounded-lg h-96 flex items-center justify-center">
                     <!-- Map Placeholder -->
-                    <iframe class="rounded-xl w-full h-full" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.120378699221!2d110.84910968408413!3d-7.561851955198028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a16fdf072a90f%3A0xea50b255b0e6ce3e!2sFakultas%20Teknik%20UNS!5e0!3m2!1sen!2sid!4v1725763958110!5m2!1sen!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div id="map" style="rounded-lg"></div>
                 </div>
-                <p class="mt-2 text-sm text-gray-600">Gerobak Terakhir Dilacak di Surakarta</p>
             </div>
 
             <!-- Card for Speed -->
             <div class="flex flex-col bg-white border shadow-sm rounded-xl p-4 md:p-5">
                 <h2 class="text-lg font-semibold text-gray-800 mb-4">Kecepatan</h2>
                 <div class="flex justify-center items-center text-4xl font-bold text-gray-800">
-                    <span id="speed">10 km/h</span>
+                    <span id="speed">0 km/h</span>
                 </div>
                 <p class="mt-2 text-sm text-gray-600 text-center">Kecepatan saat ini</p>
             </div>
@@ -76,57 +83,32 @@
             <h2 class="text-lg font-semibold text-gray-800 mb-4">Tabel Data Kecepatan dan Kapasitas Baterai</h2>
             <div class="overflow-x-auto">
                 <table class="min-w-full table-auto text-center">
+                    @php
+                        $i = 1;
+                    @endphp
                     <thead class="bg-gray-100 text">
                         <tr>
-                            <th class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase">Tanggal</th>
-                            <th class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase">Kecepatan (km/h)</th>
-                            <th class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase">Kapasitas Baterai (%)</th>
+                            <th class="px-4 py-2 text-center text-sm font-medium text-gray-500 uppercase">No.</th>
+                            <th class="px-4 py-2 text-center text-sm font-medium text-gray-500 uppercase">Tanggal</th>
+                            <th class="px-4 py-2 text-center text-sm font-medium text-gray-500 uppercase">Kecepatan (km/h)</th>
+                            <th class="px-4 py-2 text-center text-sm font-medium text-gray-500 uppercase">Kapasitas Baterai (%)</th>
                         </tr>
                     </thead>
-                    <tbody id="dataTable" class="bg-white divide-y divide-gray-200">
-                        <!-- Dummy Data Rows -->
-                        <tr>
-                            <td class="px-4 py-2 text-sm text-gray-800">2024-09-01</td>
-                            <td class="px-4 py-2 text-sm text-gray-800">10</td>
-                            <td class="px-4 py-2 text-sm text-gray-800">75</td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-2 text-sm text-gray-800">2024-09-02</td>
-                            <td class="px-4 py-2 text-sm text-gray-800">12</td>
-                            <td class="px-4 py-2 text-sm text-gray-800">70</td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-2 text-sm text-gray-800">2024-09-03</td>
-                            <td class="px-4 py-2 text-sm text-gray-800">8</td>
-                            <td class="px-4 py-2 text-sm text-gray-800">68</td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-2 text-sm text-gray-800">2024-09-04</td>
-                            <td class="px-4 py-2 text-sm text-gray-800">15</td>
-                            <td class="px-4 py-2 text-sm text-gray-800">65</td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-2 text-sm text-gray-800">2024-09-05</td>
-                            <td class="px-4 py-2 text-sm text-gray-800">11</td>
-                            <td class="px-4 py-2 text-sm text-gray-800">60</td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-2 text-sm text-gray-800">2024-09-06</td>
-                            <td class="px-4 py-2 text-sm text-gray-800">9</td>
-                            <td class="px-4 py-2 text-sm text-gray-800">58</td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-2 text-sm text-gray-800">2024-09-07</td>
-                            <td class="px-4 py-2 text-sm text-gray-800">14</td>
-                            <td class="px-4 py-2 text-sm text-gray-800">55</td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-2 text-sm text-gray-800">2024-09-08</td>
-                            <td class="px-4 py-2 text-sm text-gray-800">10</td>
-                            <td class="px-4 py-2 text-sm text-gray-800">52</td>
-                        </tr>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach ( $data as $key )
+                            <tr>
+                                <td class="px-4 py-2 text-sm text-gray-800">{{ $i++ }}</td>
+                                <td class="px-4 py-2 text-sm text-gray-800">{{ $key->created_at->format('l, d F Y') }}</td>
+                                <td class="px-4 py-2 text-sm text-gray-800">{{ $key->speed }}</td>
+                                <td class="px-4 py-2 text-sm text-gray-800">{{ $key->battery }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
+            </div>
+            <!-- Pagination Links -->
+            <div class="mt-4">
+                {{ $data->links() }} <!-- Add this line -->
             </div>
         </div>
     </div>
@@ -134,10 +116,12 @@
 <!-- End Content -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // Data for charts (replace with actual data)
-    const speedData = [10, 12, 8, 15, 11, 9, 14, 10];
-    const batteryData = [75, 70, 68, 65, 60, 58, 55, 52];
-    const labels = ['2024-09-01', '2024-09-02', '2024-09-03', '2024-09-04', '2024-09-05', '2024-09-06', '2024-09-07', '2024-09-08'];
+    // Ambil data dari variabel PHP ke JavaScript
+    const speedData = @json($data->pluck('speed'));
+    const batteryData = @json($data->pluck('battery'));
+    const labels = @json($data->pluck('created_at')->map(function($date) {
+        return \Carbon\Carbon::parse($date)->format('l, d F Y'); // Format tanggal sesuai kebutuhan
+    }));
 
     // Speed Graph
     const ctxSpeed = document.getElementById('speedGraph').getContext('2d');
@@ -187,5 +171,77 @@
             }
         }
     });
+</script>
+{{-- Maps --}}
+<script>
+    // Script Maps
+    var map = L.map('map').setView([-7.561907, 110.853972], 15);
+
+    // API Map OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var customIcon = L.icon({
+        iconUrl: 'https://cdn-icons-png.flaticon.com/512/252/252025.png',  // URL to your custom icon
+        iconSize: [20, 20],  // Icon size [width, height]
+        iconAnchor: [10, 20],  // Anchor the icon at its bottom center
+        popupAnchor: [0, -20], // Popup should appear above the marker
+    });
+
+    // Ambil data Latitude dan Longitude
+    // fetch('http://127.0.0.1:8000/api/tracking/1')
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         // Extract latitude and longitude from the data
+    //         var latlngs = data.map(point => [point.latitude, point.longitude]);
+
+    //         // Check if latlngs array is not empty
+    //         if (latlngs.length > 5) {
+    //             // Create a polyline and add it to the map
+    //             var polyline = L.polyline(latlngs, { color: 'blue' }).addTo(map);
+
+    //             // Fit the map to the polyline
+    //             map.fitBounds(polyline.getBounds());
+
+    //             // Add a marker at the end of the polyline
+    //             L.marker(latlngs[latlngs.length - 1], { icon: customIcon }).addTo(map).bindPopup("Recent Location").openPopup();
+    //         } else {
+    //             console.log("No data points available for this device.");
+    //         }
+    //     })
+    //     .catch(error => console.log(error));
+
+        // Ambil 5 data terakhir
+        fetch('http://127.0.0.1:8000/api/tracking/1')
+            .then(response => response.json())
+            .then(data => {
+                // Extract latitude and longitude from the data
+                var latlngs = data.map(point => [point.latitude, point.longitude]);
+
+                // Check if latlngs array has more than 5 points
+                if (latlngs.length > 10) {
+                    // Get the last 5 data points
+                    latlngs = latlngs.slice(-10);
+                }
+
+                // Check if latlngs array is not empty
+                if (latlngs.length > 0) {
+                    // Create a polyline and add it to the map
+                    var polyline = L.polyline(latlngs, { color: 'blue' }).addTo(map);
+
+                    // Fit the map to the polyline
+                    map.fitBounds(polyline.getBounds());
+
+                    // Add a custom marker at the end of the polyline (recent location)
+                    L.marker(latlngs[latlngs.length - 1], { icon: customIcon })
+                        .addTo(map)
+                        .bindPopup("Recent Location")
+                        .openPopup();
+                } else {
+                    console.log("No data points available for this device.");
+                }
+            })
+            .catch(error => console.log(error));
 </script>
 @endsection
