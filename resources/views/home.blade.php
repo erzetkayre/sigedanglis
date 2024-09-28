@@ -5,6 +5,15 @@
 <script>
     AOS.init();
 </script>
+<style>
+    #map{
+        width: 100%;
+        height: 400px;
+        border-radius: 0.5rem;
+        overflow: hidden;
+    }
+</style>
+
 {{-- Section Welcome --}}
 <section class="pt-10" id="beranda" data-aos="fade-up">
     <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
@@ -103,7 +112,7 @@
 </section>
 
 {{-- Section Features --}}
-<section class="pt-5 pb-10" id="features" data-aos="fade-up">
+<section class="pt-10 pb-10" id="features" data-aos="fade-up">
     <div class="text-center max-w-[85rem] px-4 py-3 sm:px-6 lg:px-8 lg:pt-7 mx-auto">
         <h1 class=" text-5xl text-gray-800 font-bold lg:text-4xl align-middle">
             Our Features
@@ -212,6 +221,24 @@
     </div>
 </section>
 
+{{-- Section Video --}}
+<section class="pt-5 pb-10" id="features" data-aos="fade-up">
+    <div class="text-center max-w-[85rem] px-4 py-3 sm:px-6 lg:px-8 lg:pt-7 mx-auto">
+        <h1 class=" text-5xl text-gray-800 font-bold lg:text-4xl align-middle">
+            Discover Our Smart Cart!
+        </h1>
+        <p class="mt-1 text-sky-400 text-md">
+            Kenal kami lebih dekat melalui video berikut
+        </p>
+    </div>
+    <div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
+        <video class="w-full rounded-lg shadow-lg" controls>
+            <source src="assets/videos/fixxx.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</section>
+
 {{-- Section Location --}}
 <section class="pt-10 pb-10" id="location" data-aos="fade-up">
     <div class="text-center">
@@ -223,8 +250,8 @@
                 Lokasi terkini gerobak dagang listrik
             </p>
         </div>
-        <div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 lg:py-3 mx-auto">
-            <iframe class="rounded-xl w-full justify-end" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.120378699221!2d110.84910968408413!3d-7.561851955198028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a16fdf072a90f%3A0xea50b255b0e6ce3e!2sFakultas%20Teknik%20UNS!5e0!3m2!1sen!2sid!4v1725763958110!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 lg:py-3 mx-auto H-64">
+            <div id="map" style="rounded-lg"></div>
         </div>
     </div>
 </section class="pt-10 pb-10" id="team">
@@ -280,7 +307,7 @@
                     <label for="hero-input" class="sr-only">Subscribe</label>
                     <input type="text" id="hero-input" name="hero-input" class="py-3 px-4 block w-full border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Enter your email">
                 </div>
-                <a class="w-full sm:w-auto whitespace-nowrap p-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" href="#">
+                <a inactive class="w-full sm:w-auto whitespace-nowrap p-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" href="">
                     Subscribe
                 </a>
                 </div>
@@ -304,6 +331,49 @@
 </section>
 
 
+<script>
+    // Script Maps
+    var map = L.map('map').setView([-7.561907, 110.853972], 15);
+
+    // API Map OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var customIcon = L.icon({
+        iconUrl: 'https://cdn-icons-png.flaticon.com/512/252/252025.png',
+        iconSize: [30, 30],
+        iconAnchor: [10, 20],
+        popupAnchor: [0, -20],
+    });
+
+    url = 'http://127.0.0.1:8000/api/tracking/1';
+
+    // Ambil data Latitude dan Longitude
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.length > 0) {
+                var latestPoint = data[data.length - 1];
+                var latlng = [latestPoint.latitude, latestPoint.longitude];
+
+                // Update the marker and map view
+                L.marker(latlng, { icon: customIcon })
+                    .addTo(map)
+                    .bindPopup("Recent Location")
+                    .openPopup();
+
+                map.setView(latlng, 17);
+
+                // Call the function to get the city name
+                getCityName(latlng[0], latlng[1]);
+            } else {
+                console.log("No data points available for this device.");
+            }
+        })
+        .catch(error => console.log(error));
+
+</script>
 
 
 @endsection

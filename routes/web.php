@@ -20,18 +20,24 @@ Route::middleware('auth')->group(function () {
 
     // Route untuk Owner
     Route::name('owner.')->middleware('role:owner')->group(function() {
+        // Owner Monitoring
         Route::get('/owner/dashboard', Owner\OwnerDashboardController::class)->name('dashboard');
         Route::get('owner/monitoring-pv', [Owner\MonitoringController::class, 'monitoringpv'])->name('pv');
         Route::get('owner/monitoring-gerobak', [Owner\MonitoringController::class, 'monitoringcart'])->name('cart');
         Route::resource('owner/users', Owner\UserManagementController::class);
         Route::resource('owner/report', Owner\ReportController::class);
+
+        // Owner Transaksi
+
     });
 
     // Route untuk Seller
     Route::name('seller.')->middleware('role:seller')->group(function(){
         Route::get('/dashboard', Seller\SellerDashboardController::class)->name('dashboard');
+
     });
 
 });
+
 
 require __DIR__.'/auth.php';
